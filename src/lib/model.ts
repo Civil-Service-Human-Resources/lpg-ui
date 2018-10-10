@@ -345,8 +345,10 @@ export class ModuleWithCourse extends Module {
 }
 export class Event {
 	static create(data: any) {
-		const date = data.date ? new Date(data.date) : new Date()
-		return new Event(date, data.location, data.capacity, data.id)
+		//const date = data.date ? new Date(data.date) : new Date()
+        const date = data.dateRanges[0] ? new Date(data.dateRanges[0].date) : new Date()
+        const venue = data.venue ? data.venue.location : data.location
+		return new Event(date, venue, data.capacity, data.id)
 	}
 
 	id: string

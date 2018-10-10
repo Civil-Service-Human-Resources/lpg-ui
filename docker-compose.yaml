@@ -1,24 +1,25 @@
-version: '3.4'
+version: "3.4"
 services:
-  # ElasticSearch
+
+# ElasticSearch
   elasticsearch:
     container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch@sha256:5b2bb3e91379f04a9da7c477314a24b2428fb1a4c20696991dff54b70d1b4ef3
     ports:
       - 9200:9200
       - 9300:9300
-    command: 'elasticsearch -E cluster.name=local -E discovery.type=single-node'
-  # /ElasticSearch
+    command: "elasticsearch -E cluster.name=local -E discovery.type=single-node"
+# /ElasticSearch
 
-  # Learning Locker
+# Learning Locker
   learning-locker-api-worker:
-    command: ['node', '/opt/learning-locker/worker/dist/server']
+    command: ["node", "/opt/learning-locker/worker/dist/server"]
     container_name: learning-locker-api-worker
     image: cshr/lpg-learning-locker:fe8104bf2f0fedb8f5af138bd8860a9c27dd2bb12ecb827f09e754e279a70fa8
     working_dir: /opt/learning-locker
 
   learning-locker-ui:
-    command: ['/opt/learning-locker/run-ui.sh']
+    command: ["/opt/learning-locker/run-ui.sh"]
     container_name: learning-locker-ui
     image: cshr/lpg-learning-locker:fe8104bf2f0fedb8f5af138bd8860a9c27dd2bb12ecb827f09e754e279a70fa8
     ports:
@@ -26,7 +27,7 @@ services:
     working_dir: /opt/learning-locker
 
   learning-locker-xapi:
-    command: ['node', '/opt/xapi-service/dist/server']
+    command: ["node", "/opt/xapi-service/dist/server"]
     container_name: learning-locker-xapi
     depends_on:
       - mongodb
@@ -46,20 +47,16 @@ services:
     image: redis@sha256:3446883dfe13ab3db67433aace0e72d8cd669c528e60c617c42d6c697f0fa41f
 
   setup-learning-locker:
-    command:
-      [
-        '/opt/learning-locker/./node_modules/.bin/babel-node',
-        '/opt/learning-locker/mkadmin.js',
-      ]
+    command: ["/opt/learning-locker/./node_modules/.bin/babel-node", "/opt/learning-locker/mkadmin.js"]
     depends_on:
       - mongodb
     environment:
       - NODE_PATH=/opt/learning-locker
     image: cshr/lpg-learning-locker:fe8104bf2f0fedb8f5af138bd8860a9c27dd2bb12ecb827f09e754e279a70fa8
     working_dir: /opt/learning-locker
-  # /Learning Locker
+# /Learning Locker
 
-  # CSHR
+# CSHR
 
   identity:
     container_name: identity

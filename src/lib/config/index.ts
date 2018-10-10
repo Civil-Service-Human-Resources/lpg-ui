@@ -133,7 +133,7 @@ export const XAPI = set({
 		password: env.XAPI_PASS || '1c0e1b6827606d7efed71e204939d048f94f842b',
 		username: env.XAPI_USER || '66f2b4fc001e3da992d23b57d8a7457655bea078',
 	},
-	courseBaseUri: 'http://cslearning.gov.uk/courses',
+    courseBaseUri: 'http://cslearning.gov.uk/courses',
 	eventBaseUri: 'http://cslearning.gov.uk/events',
 	moduleBaseUri: 'http://cslearning.gov.uk/modules',
 	url: env.XAPI_URL || 'http://localhost:8083/data/xAPI',
