@@ -1,20 +1,28 @@
 LPG Services ·
 [![Build Status](https://travis-ci.org/Civil-Service-Human-Resources/lpg-services.svg?branch=master)](https://travis-ci.org/Civil-Service-Human-Resources/lpg-services)
 =====================
-lpg-services contains the code you need to start building a user interface for government platforms and services.
+lpg-services contains the code you need to start the Learning Platform for Government application.
 ## Getting Started
 
 ### Prerequisites
+#### Installs
 Please have the following downloaded and installed:
 * [Docker](https://www.docker.com/get-docker)
 * [node/npm](https://nodejs.org/en/)
+* [Keybase](https://keybase.io/)
 * [Prettier](https://prettier.io/)
 * [TSlint](https://palantir.github.io/tslint/)
 
+#### Set up local hosts file
 Add the following to your `/etc/hosts`
 ```
 127.0.0.1    lpg.local.cshr.digital,identity.local.cshr.digital
 ```
+#### Keybase
+Request Keybase access from [Yuksel](https://github.com/elxsy) or [Rob](https://github.com/robertmarks), and ensure the application is running and enabled in Finder (`Settings > Advanced > Enable Keybase in Finder`)
+
+#### Docker
+Log into Docker 
 
 ### Installation
 Clone the application
@@ -31,7 +39,7 @@ npm run build
 npm run start:all
 ```
 
-There are additional npm scripts for the application which can be found in [package.json](https://github.com/Civil-Service-Human-Resources/lpg-services/blob/master/package.json)
+There are additional npm scripts for the application which can be found in [package.json](https://github.com/Civil-Service-Human-Resources/lpg-services/blob/master/package.json).
 
 ### Accessing the app
 The various interfaces of the app accessed via the following URLs:  
@@ -39,9 +47,8 @@ The various interfaces of the app accessed via the following URLs:
 | INTERFACE | DESCRIPTION | URL |
 |--|--|--|
 | LPG UI | Main UI of the platform | http://lpg.local.cshr.digital:3001/home |
-| LPG Management | Internal management of course content. | http://lpg.local.cshr.digital:3003/courses |
 | LPG Management | Content management interface | http://lpg.local.cshr.digital:3005/content-management |
-| Identity | http://localhost:8080 | Identity authentication service |
+| Identity | Identity authentication service | http://localhost:8080 |
 | Identity Management | User account admin for managing identity details | http://localhost:8081/management/identities |
 
 
