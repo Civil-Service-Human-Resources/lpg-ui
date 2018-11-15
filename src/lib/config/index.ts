@@ -153,3 +153,8 @@ export const LPG_MANAGEMENT_URL =
 	env.LPG_MANAGEMENT_SERVER || 'http://lpg.local.cshr.digital:3005'
 
 export const REQUEST_TIMEOUT = Number(env.REQUEST_TIMEOUT) || 15000
+
+export const NOTIFICATION_SERVICE = {
+	timeout: 15000,
+	url: env.NOTIFICATION_SERVICE_URL || 'http://localhost:9005',
+}

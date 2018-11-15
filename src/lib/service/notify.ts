@@ -1,5 +1,6 @@
 import * as config from 'lib/config'
-import * as gov from 'notifications-node-client'
+import {NotificationService} from '../../notification-service'
+import {NotificationServiceConfig} from '../../notification-service/notificationServiceConfig'
 
 export interface BookingCancellation {
 	bookingReference: string
@@ -34,7 +35,7 @@ export interface BookingConfirmation {
 }
 
 export async function bookingCancelled(info: BookingCancellation) {
-	const notify = new gov.NotifyClient(config.GOV_NOTIFY_API_KEY)
+	const notify = new NotificationService(new NotificationServiceConfig())
 
 	const templateData = {...info}
 
@@ -69,7 +70,8 @@ export async function bookingCancelled(info: BookingCancellation) {
 }
 
 export async function bookingRequested(info: BookingConfirmation) {
-	const notify = new gov.NotifyClient(config.GOV_NOTIFY_API_KEY)
+	const notify = new NotificationService(new NotificationServiceConfig())
+
 	const templateData = {...info}
 
 	await notify
