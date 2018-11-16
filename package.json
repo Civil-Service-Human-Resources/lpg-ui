@@ -66,7 +66,7 @@
 	},
 	"dependencies": {
 		"app-root-path": "^2.1.0",
-		"axios": "0.17.1",
+		"axios": "0.18.0",
 		"azure-storage": "2.8.1",
 		"compression": "1.7.1",
 		"connect-flash": "0.1.1",

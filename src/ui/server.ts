@@ -4,6 +4,7 @@ import * as log4js from 'log4js'
 
 log4js.configure(config.LOGGING)
 
+import axios, {AxiosInstance} from 'axios'
 import * as bodyParser from 'body-parser'
 import * as compression from 'compression'
 import * as cors from 'cors'
@@ -11,15 +12,15 @@ import * as express from 'express'
 import * as asyncHandler from 'express-async-handler'
 import * as session from 'express-session'
 
+import * as model from 'lib/model'
+import * as i18n from 'lib/service/translation'
+import * as template from 'lib/ui/template'
 import * as lusca from 'lusca'
 import * as path from 'path'
 import * as serveStatic from 'serve-static'
 import * as sessionFileStore from 'session-file-store'
 
-import * as passport from 'lib/config/passport'
-import * as model from 'lib/model'
-import * as i18n from 'lib/service/translation'
-import * as template from 'lib/ui/template'
+import * as passport from 'passport'
 
 import * as bookingRouter from './controllers/booking/routes'
 import * as courseController from './controllers/course'
@@ -33,6 +34,10 @@ import * as userController from './controllers/user'
 import * as xApiController from './controllers/xapi'
 
 import * as errorController from './controllers/errorHandler'
+
+import {Auth} from '../lib/identity/auth'
+import {AuthConfig} from '../lib/identity/authConfig'
+import {IdentityService} from '../lib/identity/identityService'
 
 /* tslint:disable:no-var-requires */
 const flash = require('connect-flash')
@@ -125,13 +130,38 @@ app.use(
 
 app.use(serveStatic('assets'))
 app.use(favicon(path.join('assets', 'img', 'favicon.ico')))
-passport.configure(
+
+const authConfig = new AuthConfig(
 	config.AUTHENTICATION.clientId,
 	config.AUTHENTICATION.clientSecret,
 	config.AUTHENTICATION.serviceUrl,
-	app,
-	config.LPG_UI_SERVER
+	`${config.LPG_UI_SERVER}`,
+	'/authenticate'
 )
+
+const axiosInstance: AxiosInstance = axios.create({
+	headers: {
+		'Content-Type': 'application/json',
+	},
+	timeout: config.REQUEST_TIMEOUT,
+})
+
+const identityService = new IdentityService(axiosInstance)
+const auth = new Auth(authConfig, passport, identityService)
+
+auth.configure(app, 'LEARNER')
+
+//
+// passport.configure(
+// 	config.AUTHENTICATION.clientId,
+// 	config.AUTHENTICATION.clientSecret,
+// 	config.AUTHENTICATION.serviceUrl,
+// 	app,
+// 	config.LPG_UI_SERVER
+// )
+// app.use(passport.isAuthenticated)
+// app.use(passport.hasRole('LEARNER'))
+
 i18n.configure(app)
 
 app.param('courseId', asyncHandler(courseController.loadCourse))
@@ -166,9 +196,6 @@ app.get('/status', (req, res) => {
 })
 
 app.post('/feedback.record', asyncHandler(feedbackController.record))
-
-app.use(passport.isAuthenticated)
-app.use(passport.hasRole('LEARNER'))
 
 app.get('/api/lrs.record', asyncHandler(learningRecordController.record))
 
