@@ -16,6 +16,13 @@
 		}
 	}
 
+	@include m(homepage) {
+		padding-bottom: 40px;
+		@include media(desktop) {
+			padding-bottom: 40px;
+		}
+	}
+
 	outline: none;
 }
 

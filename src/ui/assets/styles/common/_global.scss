@@ -98,7 +98,11 @@ hr.clear {
 		background-color: $light-grey;
 
 		.govuk-body {
-			font-size: 24px;
+			font-size: 18px;
+
+			@include media(desktop) {
+				font-size: 24px;
+			}
 		}
 	}
 }
