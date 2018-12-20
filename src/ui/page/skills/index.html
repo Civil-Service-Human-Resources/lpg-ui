@@ -11,15 +11,13 @@
 						{#if $signedInUser.organisationalUnit.name}
 							<div class="multiple-choice">
 								<input type="radio" value="{$signedInUser.organisationalUnit.name}" id="{$signedInUser.organisationalUnit.name}" name="quizSelector" />
-								<label class="label-area" for="{$signedInUser.organisationalUnit.name}">Organisational "core" learning</label>
-								<label for="{$signedInUser.organisationalUnit.name}"><strong>{$signedInUser.organisationalUnit.name}</strong></label>
+								<label class="label-area" for="{$signedInUser.organisationalUnit.name}"><span class="wide-label">Organisational "core" learning</span><strong>{$signedInUser.organisationalUnit.name}</strong></label>
 							</div>
 						{/if}
 						{#if $signedInUser.areasOfWork}
 							<div class="multiple-choice">
 								<input type="radio" value="{$signedInUser.areasOfWork}" id="{$signedInUser.areasOfWork}" name="quizSelector" />
-								<label class="label-area" for="{$signedInUser.areasOfWork}">Primary area of work</label>
-								<label for="{$signedInUser.areasOfWork}"><strong>{$signedInUser.areasOfWork}</strong></label>
+								<label class="label-area" for="{$signedInUser.areasOfWork}"><span class="wide-label">Primary area of work</span><strong>{$signedInUser.areasOfWork}</strong></label>
 							</div>
 						{/if}
 						{#if $signedInUser.otherAreasOfWork}
@@ -27,8 +25,7 @@
 							{#each $signedInUser.otherAreasOfWork as aow}
 								<div class="multiple-choice">
 									<input type="radio" value="{aow.name}" id="{aow.name}" name="quizSelector" />
-									<label class="label-area" for="{aow.name}">Other area of work</label>
-									<label for="{aow.name}"><strong>{aow.name}</strong></label>
+									<label class="label-area" for="{aow.name}"><span class="wide-label">Other area of work</span><strong>{aow.name}</strong></label>
 								</div>
 							{/each}
 						{/if}
@@ -36,8 +33,7 @@
 							{#each $signedInUser.interests as interest}
 								<div class="multiple-choice">
 									<input type="radio" value="{interest.name}" id="{interest.name}" name="quizSelector" />
-									<label class="label-area" for="{aow.name}">Interest</label>
-									<label for="{interest.name}"><strong>{interest.name}</strong></label>
+									<label class="label-area" for="{interest.name}"><span class="wide-label">Interest</span><strong>{interest.name}</strong></label>
 								</div>
 							{/each}
 						{/if}

@@ -127,3 +127,18 @@ hr.clear {
 .back-to-top {
 	text-align: right;
 }
+
+.multiple-choice {
+	.label-area {
+		display: flex;
+		flex-direction: column;
+
+		@media (min-width: 641px) {
+			flex-direction: row;
+
+			.wide-label {
+				min-width: 258px;
+			}
+		}
+	}
+}
