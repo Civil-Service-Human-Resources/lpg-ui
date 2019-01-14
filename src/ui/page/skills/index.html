@@ -1,50 +1,19 @@
 <Page title="Skills" {_csrf}>
 	<div class="container container--main">
-		<BackButton link="/profile" />
+		<BackButton link="/skills/" />
         <div class="grid-row ">		
 		  	<div class="column-two-thirds">
-				<h1 class="heading heading-large">Choose which area to measure</h1>
-				<p class="govuk-body">If you can't see the area you want to measure, you can add it in your <a href="/profile">profile</a></p>
-				<form action="/skills/index" method="post">
-					<fieldset class="u-space-b30">
-					  	<input type="hidden" name="_csrf" value="{_csrf}">
-						{#if $signedInUser.organisationalUnit.name}
-							<div class="multiple-choice">
-								<input type="radio" value="{$signedInUser.organisationalUnit.name}" id="{$signedInUser.organisationalUnit.name}" name="quizSelector" />
-								<label class="label-area" for="{$signedInUser.organisationalUnit.name}">Organisational "core" learning</label>
-								<label for="{$signedInUser.organisationalUnit.name}"><strong>{$signedInUser.organisationalUnit.name}</strong></label>
-							</div>
-						{/if}
-						{#if $signedInUser.areasOfWork}
-							<div class="multiple-choice">
-								<input type="radio" value="{$signedInUser.areasOfWork}" id="{$signedInUser.areasOfWork}" name="quizSelector" />
-								<label class="label-area" for="{$signedInUser.areasOfWork}">Primary area of work</label>
-								<label for="{$signedInUser.areasOfWork}"><strong>{$signedInUser.areasOfWork}</strong></label>
-							</div>
-						{/if}
-						{#if $signedInUser.otherAreasOfWork}
-					
-							{#each $signedInUser.otherAreasOfWork as aow}
-								<div class="multiple-choice">
-									<input type="radio" value="{aow.name}" id="{aow.name}" name="quizSelector" />
-									<label class="label-area" for="{aow.name}">Other area of work</label>
-									<label for="{aow.name}"><strong>{aow.name}</strong></label>
-								</div>
-							{/each}
-						{/if}
-						{#if $signedInUser.interests}
-							{#each $signedInUser.interests as interest}
-								<div class="multiple-choice">
-									<input type="radio" value="{interest.name}" id="{interest.name}" name="quizSelector" />
-									<label class="label-area" for="{aow.name}">Interest</label>
-									<label for="{interest.name}"><strong>{interest.name}</strong></label>
-								</div>
-							{/each}
-						{/if}
-					</fieldset>
-					<button type="submit" class="button">Continue</button>
-				</form>
-			</div>
+				<h1 class="heading heading-large">Measure your skills quiz</h1>
+				<p class="govuk-body">This quiz is based on the policy profession standards. The standards are grouped into the following three themes: Evidence, Politics and Delivery. Each theme has six skill areas.</p>
+				<p class="govuk-body">You can choose a short quiz (around 10 minutes) as a taster, or the full quiz (around 30 minutes) if you want to get more detailed feedback. You can also customise your own quiz to include specificcomponents tailored to your needs.</p>
+                <h2 class="heading-medium">This tool will help you to:</h2>
+                <ul class="skills-list">
+                    <li>assess your skills at an awareness level</li>
+                    <li>find learning to learn more based on your result</li>
+                    <li>share the result with your manager (optional)</li>
+                </ul>
+                <a href="/skills/choose" class="button">Start now</a>
+            </div>
 			<div class="column-one-third">
 			</div>
 		</div>
