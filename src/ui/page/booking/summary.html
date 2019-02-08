@@ -1,7 +1,14 @@
 <Page title="Confirm" {_csrf}>
     <div class="container">
         <div class="grid-row">
-            <div class="column-full">
+            <div class="custom-column-with-button column-full">
+                <p class="no-margin">
+                    {#if module.cost > 0 }
+                        <a class="link-back" href="/book/{course.id}/{module.id}/{event.id}/payment">Back</a>
+                    {:else}
+                        <a class="link-back" href="/book/{course.id}/{module.id}/{event.id}/accessibility">Back</a>
+                    {/if}
+                </p>
                 <h1 class="heading-large">
                     Booking summary
                 </h1>
