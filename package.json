@@ -2,7 +2,7 @@
 	"name": "lib",
 	"version": "0.0.1",
 	"scripts": {
-		"build": "npm run sass:all && npm run compile",
+		"build": "npm nuke && npm run sass:all && npm run compile",
 		"clean": "./bin/setup-dist",
 		"compile": "./bin/tsc",
 		"dev:ui": "npm run watch & npm run watch-sass:ui & npm run start:ui & wait",
