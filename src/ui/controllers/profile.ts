@@ -200,7 +200,6 @@ export async function addOtherAreasOfWork(request: Request, response: Response) 
 		originalUrl: request.query.originalUrl,
 		professions,
 	}))
-	console.log(professionsTree)
 }
 
 export async function updateOtherAreasOfWork(request: Request, response: Response) {
@@ -214,7 +213,9 @@ export async function updateOtherAreasOfWork(request: Request, response: Respons
 			professions,
 		}))
 	} else {
-		const values: string[] = [].concat(otherAreasOfWork)
+		const values: string[] = [].concat(otherAreasOfWork).map(value => {
+			return "/professions/" + value
+		})
 		try {
 			await registry.patch('civilServants', {
 				otherAreasOfWork: values,
@@ -227,7 +228,7 @@ export async function updateOtherAreasOfWork(request: Request, response: Respons
 		try {
 			const professions = []
 			for (const profession of values) {
-				const professionResponse: any = await registry.getWithoutHal('/professions/' + profession)
+				const professionResponse: any = await registry.getWithoutHal(profession)
 				professions.push({id: professionResponse.data.id, name: professionResponse.data.name})
 			}
 
