@@ -38,7 +38,13 @@
             </li>
         </ul>
         <div class="discite__status">
-            <a href="/learning-record/{course.id}/{module.id}/feedback">Leave feedback</a>
+            <a href="/learning-record/{course.id}/{module.id}/feedback">Leave feedback <span class="visually-hidden">for 
+                {#if module.title}
+                    {module.title}
+                {:else}
+                    {course.title}
+                {/if}</span>
+            </a>
         </div>
     </div>
 
