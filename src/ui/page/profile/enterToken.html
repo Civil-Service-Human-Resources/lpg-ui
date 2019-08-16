@@ -1,9 +1,13 @@
-<PageNoNav title="Enter token" {_csrf}>
-    <div class="container">
+<Page title="Enter token" {_csrf}>
+    <div class="profile-container container">
         <div class="grid-row">
+            <div class="column-with-back-button column-full">
+                <p class="no-margin">
+                    <a class="link-back" href="/profile/department">Back</a>
+                </p>
+            </div>
             <div class="column-two-thirds">
                 <h1 class="heading-large">
-                    <span class="heading-secondary">{organisation}</span>
                     <span class="heading-primary">Enter token</span>
                 </h1>
                 {#if (error)}
@@ -12,7 +16,7 @@
                 </div>
                 {/if}
 
-                <p class="lede">This organisation requires you to supply a token.</p>
+                <p class="lede">{organisation} requires you to supply a token to set it as your organisation</p>
 
                 <form autocomplete="off" method="post" action="/profile/organisation">
                     <div class="form-group">
@@ -30,9 +34,9 @@
             <div class="column-one-third"></div>
         </div>
     </div>
-</PageNoNav>
+</Page>
 <script>
-	import PageNoNav from '../../component/PageNoNav.html'
+	import Page from '../../component/Page.html'
 
 	export default {
 		data() {
@@ -41,7 +45,7 @@
 		},
 
 		components: {
-            PageNoNav,
+            Page,
 		}
 	}
 </script>
