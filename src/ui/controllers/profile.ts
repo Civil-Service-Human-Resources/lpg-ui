@@ -62,6 +62,15 @@ export async function addOrganisation(request: Request, response: Response) {
 	}))
 }
 
+export async function enterToken(request: Request, response: Response) {
+	const organisation = request.body.organisation
+
+	response.send(template.render('profile/enterToken', request, response, {
+		organisation,
+		originalUrl: request.body.originalUrl,
+	}))
+}
+
 export async function updateOrganisation(request: Request, response: Response) {
 	const value = request.body.organisation
 

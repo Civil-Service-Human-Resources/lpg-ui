@@ -1,0 +1,47 @@
+<PageNoNav title="Enter token" {_csrf}>
+    <div class="container">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h1 class="heading-large">
+                    <span class="heading-secondary">{organisation}</span>
+                    <span class="heading-primary">Enter token</span>
+                </h1>
+                {#if (error)}
+                <div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+                    <div class="error-message">Please enter the correct organisation token</div>
+                </div>
+                {/if}
+
+                <p class="lede">This organisation requires you to supply a token.</p>
+
+                <form autocomplete="off" method="post" action="/profile/organisation">
+                    <div class="form-group">
+                        <fieldset>
+                            <label class="form-label" for="token"><strong>Token</strong></label>
+                            <input class="form-control width-10" id="token" name="token" type="text">
+                        </fieldset>
+                    </div>
+
+                    <input type="hidden" name="_csrf" value="{_csrf}">
+                    <input type="hidden" name="originalUrl" value="{originalUrl}">
+                    <button type="submit" class="button">Submit</button>
+                </form>
+            </div>
+            <div class="column-one-third"></div>
+        </div>
+    </div>
+</PageNoNav>
+<script>
+	import PageNoNav from '../../component/PageNoNav.html'
+
+	export default {
+		data() {
+			return {
+			}
+		},
+
+		components: {
+            PageNoNav,
+		}
+	}
+</script>
