@@ -90,8 +90,7 @@ export class Course {
 		return this.modules
 	}
 
-	isAssociatedLearningModule(id: number)
-	{
+	isAssociatedLearningModule(id: number) {
 		return this.modules[id].associatedLearning
 	}
 
@@ -161,7 +160,6 @@ export class Course {
 		return null
 	}
 
-
 	getMandatoryCount() {
 		const modules = this.getModules()
 		let count = 0
@@ -196,7 +194,7 @@ export class Course {
 		const completionDate = this.getCompletionDate()
 		if (this.audience) {
 			return this.audience!.shouldRepeat(completionDate)
-	}
+		}
 		return false
 	}
 }
@@ -271,8 +269,7 @@ export class Module {
 		return this.events.find(event => event.id === eventId)
 	}
 
-	isAssociatedLearning()
-	{
+	isAssociatedLearning() {
 		return this.associatedLearning
 	}
 }

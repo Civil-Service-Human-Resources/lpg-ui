@@ -137,7 +137,6 @@ export async function display(ireq: express.Request, res: express.Response) {
 	const req = ireq as extended.CourseRequest
 
 	const course = req.course
-	logger.info("lsajdfljsdlafj")
 	const module = course.modules.length === 1 ? course.modules[0] : undefined
 
 	logger.debug(`Displaying course, courseId: ${req.params.courseId}`)
@@ -173,23 +172,16 @@ export async function display(ireq: express.Request, res: express.Response) {
 					state: moduleRecord ? moduleRecord.state : null,
 				}
 			})
-			//set the course state to equal the record state
-			// record.state = 'IN_PROGRESS'
+			let recordState = "none"
 
+			if (record && record.modules) {
+				const faceToFaceModules = record.modules.filter(moduleFiltered => moduleFiltered.moduleType === "face-to-face")
 
-			let recordState = "none";
-
-			if (record && record.modules)
-			{
-				let faceToFaceModules = record.modules.filter(module => module.moduleType == "face-to-face");
-
-				if( faceToFaceModules.length != 0)
-				{
+				if ( faceToFaceModules.length !== 0) {
 					// @ts-ignore
 					recordState = faceToFaceModules[0].state
 				}
 			}
-
 
 			res.send(
 				template.render(`course/${type}`, req, res, {
@@ -198,7 +190,7 @@ export async function display(ireq: express.Request, res: express.Response) {
 					courseDetails: getCourseDetails(req, course, module),
 					module,
 					modules,
-					recordState
+					recordState,
 				})
 			)
 			break
