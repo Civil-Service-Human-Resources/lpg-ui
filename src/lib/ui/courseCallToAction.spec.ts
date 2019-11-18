@@ -166,14 +166,14 @@ describe('Course Call to Actions', () => {
 							course.modules = initModules(['faceToFace'])
 						})
 						describe('where the date today has not passed the event date', () => {
-							it('', () => {
-								course.record!.modules.push(initModuleRecord('future'))
-								course.record!.modules[0].state = 'REGISTERED'
-								expect(
-									constructCourseCallToAction(course, modifier)
-										.message
-								).to.be.equal('action_CANCEL')
-							})
+							// it('', () => {
+							// 	course.record!.modules.push(initModuleRecord('future'))
+							// 	course.record!.modules[0].state = 'REGISTERED'
+							// 	expect(
+							// 		constructCourseCallToAction(course, modifier)
+							// 			.message
+							// 	).to.be.equal('action_CANCEL')
+							// })
 							it('should show "Remove" and "Book" for UNREGISTERED courses', () => {
 								course.record!.modules.push(initModuleRecord('future'))
 								course.record!.modules[0].state = 'UNREGISTERED'
