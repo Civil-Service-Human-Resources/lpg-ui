@@ -90,6 +90,11 @@ export class Course {
 		return this.modules
 	}
 
+	isAssociatedLearningModule(id: number)
+	{
+		return this.modules[id].associatedLearning
+	}
+
 	getActivityId() {
 		return `${config.XAPI.courseBaseUri}/${this.id}`
 	}
@@ -156,6 +161,7 @@ export class Course {
 		return null
 	}
 
+
 	getMandatoryCount() {
 		const modules = this.getModules()
 		let count = 0
@@ -190,7 +196,7 @@ export class Course {
 		const completionDate = this.getCompletionDate()
 		if (this.audience) {
 			return this.audience!.shouldRepeat(completionDate)
-		}
+	}
 		return false
 	}
 }
@@ -221,6 +227,7 @@ export class Module {
 		module.location = data.location
 		module.fileSize = data.fileSize
 		module.optional = data.optional || false
+		module.associatedLearning = data.associatedLearning
 		module.events = (data.events || []).map(Event.create)
 
 		return module
@@ -234,6 +241,7 @@ export class Module {
 
 	duration: number
 	optional = false
+	associatedLearning = false
 	url?: string
 	location?: string
 	fileSize?: number
@@ -261,6 +269,11 @@ export class Module {
 
 	getEvent(eventId: string) {
 		return this.events.find(event => event.id === eventId)
+	}
+
+	isAssociatedLearning()
+	{
+		return this.associatedLearning
 	}
 }
 

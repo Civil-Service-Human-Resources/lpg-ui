@@ -75,11 +75,50 @@ export function constructCourseCallToAction(
 						callToActionProps.message = `action_CANCEL`
 					}
 				}
-				break
+				break;
+			case 'blended':
+				let isFaceToFacePassed = false
+				let isCourseModuleCompleted = true
+				for (const module of course.getModules()) {
+					const recordModule = record.modules.find(recordModule => recordModule.moduleId == module.id);
+					if (recordModule) {
+						if (recordModule.moduleType == 'face-to-face') {
+							if (isBooked) {
+								if (isDatePassed) {
+									isFaceToFacePassed = true;
+								}
+							}
+						} else {
+							if (recordModule.state != "COMPLETED") {
+								isCourseModuleCompleted = false
+								break
+							}
+						}
+					} else {
+						isCourseModuleCompleted = false
+						break
+					}
+				}
+				if(isFaceToFacePassed && isCourseModuleCompleted) {
+					callToActionProps.message = ""
+					const faceToFaceModule = record.modules.find(recordModule => recordModule.moduleType == 'face-to-face');
+					callToActionProps.actionToRecord = {
+						move: `/home?move=${course.id},${
+							// @ts-ignore
+							faceToFaceModule.moduleId
+							// @ts-ignore
+						},${faceToFaceModule.eventId}`,
+						skip: `/home?skip=${course.id},${
+							// @ts-ignore
+							faceToFaceModule.moduleId
+							// @ts-ignore
+						},${faceToFaceModule.eventId}`,
+					}
+				}
+				break;
 			default:
 				break
 		}
-
 		if (!isRequired && !isBooked && isHome) {
 			callToActionProps.actionToPlan = {
 				type: CourseActionType.Delete,

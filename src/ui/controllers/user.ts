@@ -186,6 +186,7 @@ export async function newRenderAreasOfWorkPage(
 	res: express.Response
 ) {
 	const lede = req.__('register_area_page_intro')
+	// @ts-ignore
 	let selectedArr = []
 	let currentLevel: number = 0
 	let selected: number
@@ -208,6 +209,7 @@ export async function newRenderAreasOfWorkPage(
 		/* set the 'progress' vars */
 		selectedArr = req.params[0].split('/')
 		currentLevel = selectedArr.length
+		// @ts-ignore
 		selected = selectedArr[currentLevel - 1] || 0
 	}
 
@@ -229,6 +231,7 @@ export async function newRenderAreasOfWorkPage(
 
 		prevLevelUrl = levels[currentLevel! - 1][selected!].url
 		if (levels.length === currentLevel) {
+			// @ts-ignore
 			if (selectedArr.length! > 1) {
 				followPath.push('children')
 			}
@@ -239,7 +242,8 @@ export async function newRenderAreasOfWorkPage(
 			 */
 
 			prevLevelUrl = levels[currentLevel - 1][selected!].url
-
+			// @ts-ignore
+			// @ts-ignore
 			selectedArr.forEach((selection: number, index: number) => {
 				if (index > 0) {
 					followPath.push('children')
@@ -262,14 +266,17 @@ export async function newRenderAreasOfWorkPage(
 
 			if (parsed) {
 				/* only set the results to the appropriate level*/
+				// @ts-ignore
 				levels[selectedArr.length] = parsed[0]
 				req.session!.prevLevelUrl = parsed[1]
 			}
 		}
 	}
 
+	// @ts-ignore
 	if (selectedArr) {
 		/* Slice the array to the amount of levels the user should see and save the levels to session */
+		// @ts-ignore
 		levels = levels.slice(0, selectedArr.length + 1)
 		req.session!.levels = levels
 	}
@@ -282,6 +289,7 @@ export async function newRenderAreasOfWorkPage(
 			levels,
 			...res.locals,
 			selected: selected!,
+			// @ts-ignore
 			selectedArr,
 		})
 	)
@@ -545,8 +553,10 @@ export async function updateProfile(
 	const req = ireq as extended.CourseRequest
 
 	let inputName = req.params.profileDetail
+	// @ts-ignore
 	let fieldValue = req.body[inputName]
 
+	// @ts-ignore
 	const node = nodes[inputName]
 
 	let errorMessage = ''

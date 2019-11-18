@@ -15,7 +15,7 @@
                 <h2 class="heading-medium">Learning outcomes</h2>
                 <div>{@html $toHtml(course.learningOutcomes)}</div>
                 {/if}
-                <DisciteModule type="single" {course} {module}/>
+                <DisciteModule type="single" {course} {module} {recordState}/>
             </div>
             <div class="column-one-third">
                 {#if courseDetails.length} {#each courseDetails as dataRows}

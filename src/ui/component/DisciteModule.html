@@ -1,14 +1,33 @@
 <div class="discite__item u-clearfix discite__item--module">
+
+
     <slot name="main">
 	    <DisciteModuleMain {type} {cta} {course} {module} {cta} {modifier}/>
     </slot>
 	<slot name="properties">
-		
 	    <DisciteModuleProperties {type} {cta} {course} {modifier} {module} /> 
     </slot>
-	<slot name="actions">
-        <DisciteModuleActions cta={$constructModuleCta(course.id, module, $req.user)} {course} {module} />
-    </slot>
+
+<!--    Fixes: -->
+<!--    Display the button even when the module has been completed -->
+<!--    Display the button for the face-to-face module -->
+
+<!--    <p>Record State: {recordState}</p>-->
+<!--    <p>associatedLearning: {module.associatedLearning}</p>-->
+<!--    <p>Together: {recordState != "APPROVED" && module.associatedLearning}</p>-->
+    {#if recordState}
+        {#if recordState != "APPROVED" && module.associatedLearning}
+        <p style="display: inline-block ">Available on confirmation of a booking</p>
+
+    <!--            <div style="padding-bottom: 80px; margin: 0"></div>-->
+        {:else}
+            <slot name="actions">
+                <DisciteModuleActions cta={$constructModuleCta(course.id, module, $req.user)} {course} {module}/>
+            </slot>
+        {/if}
+    {/if}
+
+
 </div>
 <script>
 	import DisciteModuleMain from './disciteParts/DisciteModuleMain.html'

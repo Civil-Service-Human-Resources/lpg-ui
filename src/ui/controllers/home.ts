@@ -21,6 +21,7 @@ export async function home(req: express.Request, res: express.Response, next: ex
 			catalog.findRequiredLearning(user),
 		])
 
+
 		const requiredLearning = requiredLearningResults.results
 		const learningHash = suggestionController.hashArray(
 			learningRecord,
@@ -31,11 +32,13 @@ export async function home(req: express.Request, res: express.Response, next: ex
 			learningRecord
 		)
 
+
 		for (let i = 0; i < requiredLearning.length; i++) {
 			const requiredCourse = requiredLearning[i]
 			if (learningHash[requiredCourse.id]) {
 				const record = learningHash[requiredCourse.id]
 				if (record) {
+                    console.log(record)
 					requiredCourse.record = record
 					if (record.isComplete()) {
 						if (!requiredCourse.shouldRepeat()) {
@@ -59,6 +62,7 @@ export async function home(req: express.Request, res: express.Response, next: ex
 
 		const bookedLearning: learnerRecord.CourseRecord[] = []
 		let plannedLearning: learnerRecord.CourseRecord[] = []
+
 
 		for (const record of learningRecord) {
 			if (!record.isComplete() && learnerRecord.isActive(record)) {

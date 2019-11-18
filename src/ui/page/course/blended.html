@@ -10,12 +10,10 @@
             <div class="column-two-thirds">
                 <h2 class="description heading-medium">Overview</h2>
                 <div>{@html $toHtml(course.description)}</div>
-
                 {#if course.learningOutcomes}
                 <h2 class="heading-medium">Learning outcomes</h2>
                 <div>{@html $toHtml(course.learningOutcomes)}</div>
                 {/if}
-
                 <div class="discite" id="modules">
                     {#if course.getMandatoryCount()>0}
                         <p>
@@ -23,11 +21,12 @@
                         </p>
                     {/if}
                     {#each modules as module}
-                        <DisciteModule type="blended" {course} {module}/>
+                    {#if course.getMandatoryCount()>0}
+                        <DisciteModule type="blended" {recordState} {course} {module}/>
+                    {/if}
                     {/each}
                 </div>
             </div>
-
             <div class="column-one-third">
                 {#if courseDetails.length} {#each courseDetails as dataRows}
                 <RightBox {dataRows}/>
