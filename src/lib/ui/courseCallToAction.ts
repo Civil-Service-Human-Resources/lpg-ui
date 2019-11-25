@@ -86,7 +86,8 @@ export function constructCourseCallToAction(
 					const isModuleInLearningRecord = record.modules.find(recordModule => recordModule.moduleId === moduleCourse.id)
 					for (const moduleRecord of record.modules) {
 						const isItemAlreadyInArray = iDsOfNonOptionalnotStartedCourses.includes(moduleRecord.moduleId)
-						if (!isModuleInLearningRecord && !moduleCourse.optional && !isItemAlreadyInArray && moduleRecord.state !== "COMPLETED") {
+						const isModuleCompleted = moduleRecord.state !== "COMPLETED"
+						if (!isModuleInLearningRecord && !moduleCourse.optional && !isItemAlreadyInArray && isModuleCompleted) {
 							nonOptionalnotStartedCourses.push(moduleCourse)
 							iDsOfNonOptionalnotStartedCourses.push(moduleRecord.moduleId)
 						}
@@ -114,7 +115,7 @@ export function constructCourseCallToAction(
 				}
 				if (isFaceToFacePassed && isCourseModuleCompleted) {
 					callToActionProps.message = ""
-					const faceToFaceModule = record.modules.find(recordModule => recordModule.moduleType == 'face-to-face');
+					const faceToFaceModule = record.modules.find(recordModule => recordModule.moduleType === 'face-to-face')
 					callToActionProps.actionToRecord = {
 						move: `/home?move=${course.id},${
 							// @ts-ignore
