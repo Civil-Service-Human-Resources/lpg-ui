@@ -144,3 +144,18 @@ export async function getWithoutHal(path: string): Promise<AxiosResponse> {
 		throw new Error(error)
 	}
 }
+
+export async function patchProfile(token: string, data: any): Promise<AxiosResponse> {
+	return await new Promise<AxiosResponse>((resolve, reject) => {
+		http
+			.patch(config.REGISTRY_SERVICE_URL + '/civilServants/profile', data, {
+				headers: {Authorization: `Bearer ${token}`},
+			})
+			.then((response: any) => {
+				resolve(response)
+			})
+			.catch((error: any) => {
+				resolve(error.response)
+			})
+	})
+}
