@@ -105,7 +105,7 @@ export const LOGGING = set(
 			out: {type: 'console'},
 		},
 		categories: {
-			default: {appenders: ['out'], level: 'info'},
+			default: {appenders: ['out'], level: 'ERROR'},
 		},
 	},
 	{
