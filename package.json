@@ -103,7 +103,7 @@
 		"moment": "^2.24.0",
 		"node-exiftool": "2.3.0",
 		"node-fetch": "1.7.3",
-		"node-sass": "4.9.0",
+		"node-sass": "4.13.1",
 		"notifications-node-client": "4.1.0",
 		"passport": "0.4.0",
 		"passport-oauth2": "1.4.0",
